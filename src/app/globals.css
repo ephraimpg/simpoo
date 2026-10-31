@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+@theme {
+  /* Maroon palette — anchored on the official logo swatch (#8e2031) */
+  --color-maroon-50: #fbf4f5;
+  --color-maroon-100: #f7e6e9;
+  --color-maroon-200: #eecdd3;
+  --color-maroon-300: #e0a5ae;
+  --color-maroon-400: #cc7382;
+  --color-maroon-500: #b34a5c;
+  --color-maroon-600: #a03244;
+  --color-maroon-700: #8e2031;
+  --color-maroon-800: #751a29;
+  --color-maroon-900: #5a1521;
+  --color-maroon-950: #330b12;
+
+  /* Ink palette (black / grey scale) */
+  --color-ink-50: #f7f6f6;
+  --color-ink-100: #eceaea;
+  --color-ink-200: #d8d4d5;
+  --color-ink-300: #b5afb1;
+  --color-ink-400: #8b8285;
+  --color-ink-500: #6d6467;
+  --color-ink-600: #554d50;
+  --color-ink-700: #40383b;
+  --color-ink-800: #2b2426;
+  --color-ink-900: #1b1517;
+  --color-ink-950: #0d0a0b;
+
+  /* CBC workspace neutrals — maroon accents + black/white (ink scale above) */
+  --color-cbc-line: #e7e2e3;
+  --color-cbc-muted: #6d6467;
+  --color-cbc-surface: #f8f7f7;
+
+  --font-heading: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink-800);
+    background-color: #ffffff;
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-ink-950);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: var(--color-maroon-200);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-maroon-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* Shared bases must be @utility in Tailwind v4 so component classes can @apply them. */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  transition: all 0.3s ease;
+}
+
+@utility field {
+  display: block;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-ink-200);
+  background-color: #ffffff;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  color: var(--color-ink-900);
+  transition: color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .card {
+    @apply rounded-2xl border border-ink-100 bg-white p-6 shadow-[0_1px_2px_rgba(13,10,11,0.05),0_12px_32px_-16px_rgba(13,10,11,0.2)] transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-maroon-300 hover:shadow-[0_2px_4px_rgba(13,10,11,0.06),0_24px_48px_-20px_rgba(13,10,11,0.32)];
+  }
+
+  /* Primary button — deep maroon on light surfaces */
+  .btn-maroon {
+    @apply btn bg-maroon-800 text-white shadow-[0_10px_24px_-12px_rgba(77,22,31,0.85)] hover:bg-maroon-700;
+  }
+
+  /* High-contrast button for dark surfaces — white pill with maroon text */
+  .btn-light {
+    @apply btn bg-white text-maroon-900 shadow-[0_10px_24px_-10px_rgba(13,10,11,0.6)] hover:bg-maroon-50;
+  }
+
+  .btn-outline-light {
+    @apply btn border border-white/40 text-white hover:border-maroon-300 hover:text-maroon-200;
+  }
+
+  .btn-outline-dark {
+    @apply btn border border-ink-200 text-ink-800 hover:border-maroon-800 hover:bg-maroon-50;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.22em] text-maroon-600;
+  }
+
+  .field::placeholder {
+    color: var(--color-ink-300);
+  }
+
+  .field:focus {
+    border-color: var(--color-maroon-700);
+    outline: none;
+  }
+
+  .field-error {
+    @apply field border-maroon-400 bg-maroon-50/40 focus:border-maroon-400;
+  }
+
+  .field-error:focus {
+    outline: none;
+  }
+
+  .chip-pending {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-dashed border-maroon-400 bg-maroon-50 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-maroon-700;
+  }
+
+  .pending-text {
+    @apply rounded bg-maroon-50 px-1 text-ink-800 [box-shadow:inset_0_-1px_0_0_var(--color-maroon-300)];
+  }
+
+  .link-accent {
+    @apply font-semibold text-maroon-800 underline decoration-maroon-500 decoration-2 underline-offset-4 transition-colors hover:text-maroon-600;
+  }
+}
+
+/* Reveal-on-scroll (progressive enhancement; content stays visible without JS) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle page-load hero animation */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-art {
+  animation: hero-zoom 9s ease-out both;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+/* ---------------- CBC workspace component classes ---------------- */
+.cbc-card {
+  @apply rounded-xl border border-cbc-line bg-white p-5 shadow-sm;
+}
+
+.cbc-input {
+  @apply w-full rounded-lg border border-cbc-line bg-white px-3 py-2 text-sm text-ink-900 outline-none transition-colors focus:border-maroon-600 focus:ring-2 focus:ring-maroon-600/25 disabled:cursor-not-allowed disabled:bg-cbc-surface;
+}
+
+/* Print styles for progress reports */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  /* Test papers: print the sheet itself, not the workspace chrome. */
+  .paper-sheet {
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .paper-question {
+    break-inside: avoid;
+  }
+}
+
+.print-only {
+  display: none;
+}

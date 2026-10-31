@@ -1,0 +1,103 @@
+=== 1. Pages ===
+PASS  GET / -> 200
+PASS  GET /about -> 200
+PASS  GET /academics -> 200
+PASS  GET /admissions -> 200
+PASS  GET /school-life -> 200
+PASS  GET /gallery -> 200
+PASS  GET /contact -> 200
+PASS  GET /admin -> 200
+PASS  GET /login -> 200
+PASS  GET unknown -> 404
+PASS  Home headline
+PASS  Home phones
+PASS  Home email
+PASS  Home nav has staff login link
+PASS  Home feature card: Academic Growth
+PASS  Home feature card: Parent Partnership
+PASS  Hero CTA: Explore Our School
+PASS  Hero CTA: Enquire About Admission
+PASS  JSON-LD School schema
+PASS  Contact: tel link 1
+PASS  Contact: tel link 2
+PASS  Contact: mailto
+PASS  Contact: no maps/location link
+PASS  Contact: no Kibiko Road reference
+PASS  Contact: postal address
+PASS  Admissions: enquiry form
+PASS  Admissions: FAQ section
+PASS  Gallery: filters
+PASS  Gallery: honesty note
+PASS  About: pending marker
+PASS  Academics: CBE curriculum stated
+=== 2. SEO ===
+PASS  sitemap lists /admissions
+PASS  robots blocks /admin
+PASS  robots blocks /login
+PASS  Login page: username field
+PASS  Login page: password toggle
+PASS  robots has sitemap
+=== 3. Enquiry form API ===
+PASS  Valid enquiry -> 201
+PASS  Valid enquiry returns id
+PASS  Invalid phone/name -> 422
+PASS  Field error returned
+PASS  Honeypot -> accepted but discarded
+PASS  honeypot not stored
+PASS  Second valid enquiry -> 201
+=== 4. Admin API auth ===
+PASS  Content without session -> 401
+PASS  Enquiries without session -> 401
+PASS  Gallery delete without session -> 401
+PASS  Wrong password -> 401
+PASS  Correct password -> 200
+PASS  session cookie set
+PASS  Content with session -> 200
+PASS  Content has school name
+PASS  Enquiry visible in dashboard
+PASS  Second enquiry visible
+PASS  honeypot not in dashboard
+PASS  PATCH status -> 200
+PASS  Status updated
+PASS  PUT content -> 200
+PASS  Admin edit live without rebuild
+PASS  Revert content -> 200
+PASS  revert is live
+PASS  Logout -> 200
+PASS  Content after logout -> 401
+=== 6. Staff accounts & profiles ===
+PASS  Admin re-login with username -> 200
+PASS  Staff list without session -> 401
+PASS  Profile GET returns admin user
+PASS  profile has no passwordHash
+PASS  Profile: no-op update -> 422
+PASS  Profile: wrong current password -> 401
+PASS  Profile: short new password -> 422
+PASS  Profile: valid name change -> 200
+PASS  Profile name updated
+PASS  Profile: name reverted -> 200
+PASS  Create editor account -> 201
+PASS  staff create has no passwordHash
+PASS  Duplicate username -> 409
+PASS  Weak password on create -> 422
+PASS  Invalid username -> 422
+PASS  Editor login -> 200
+PASS  Editor staff list -> 403
+PASS  Editor create account -> 403
+PASS  Editor content access -> 200
+PASS  Editor own profile update -> 200
+PASS  Demote self -> 422
+PASS  Deactivate self -> 422
+PASS  Delete self -> 422
+PASS  Deactivate editor -> 200
+PASS  Deactivated editor session -> 401
+PASS  Deactivated editor login -> 401
+PASS  Delete editor account -> 200
+PASS  Deleted editor session -> 401
+PASS  deleted editor gone from list
+=== 5. Rate limiting ===
+PASS  Rate limit kicks in -> 429
+
+===============================
+PASS: 93   FAIL: 0
+===============================

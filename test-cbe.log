@@ -1,0 +1,67 @@
+=== 1. Pages ===
+PASS  GET / -> 200
+PASS  GET /about -> 200
+PASS  GET /academics -> 200
+PASS  GET /admissions -> 200
+PASS  GET /school-life -> 200
+PASS  GET /gallery -> 200
+PASS  GET /contact -> 200
+PASS  GET /admin -> 200
+PASS  GET unknown -> 404
+PASS  Home headline
+PASS  Home phones
+PASS  Home email
+PASS  Home feature card: Academic Growth
+PASS  Home feature card: Parent Partnership
+PASS  Hero CTA: Explore Our School
+PASS  Hero CTA: Enquire About Admission
+PASS  JSON-LD School schema
+PASS  Contact: tel link 1
+PASS  Contact: tel link 2
+PASS  Contact: mailto
+PASS  Contact: maps link
+PASS  Contact: postal address
+PASS  Admissions: enquiry form
+PASS  Admissions: FAQ section
+PASS  Gallery: filters
+PASS  Gallery: honesty note
+PASS  About: pending marker
+PASS  Academics: CBE curriculum stated
+=== 2. SEO ===
+PASS  sitemap lists /admissions
+PASS  robots blocks /admin
+PASS  robots has sitemap
+=== 3. Enquiry form API ===
+PASS  Valid enquiry -> 201
+PASS  Valid enquiry returns id
+PASS  Invalid phone/name -> 422
+PASS  Field error returned
+PASS  Honeypot -> accepted but discarded
+PASS  honeypot not stored
+PASS  Second valid enquiry -> 201
+=== 4. Admin API auth ===
+PASS  Content without session -> 401
+PASS  Enquiries without session -> 401
+PASS  Gallery delete without session -> 401
+PASS  Wrong password -> 401
+PASS  Correct password -> 200
+PASS  session cookie set
+PASS  Content with session -> 200
+PASS  Content has school name
+PASS  Enquiry visible in dashboard
+PASS  Second enquiry visible
+PASS  honeypot not in dashboard
+PASS  PATCH status -> 200
+PASS  Status updated
+PASS  PUT content -> 200
+PASS  Admin edit live without rebuild
+PASS  Revert content -> 200
+PASS  revert is live
+PASS  Logout -> 200
+PASS  Content after logout -> 401
+=== 5. Rate limiting ===
+PASS  Rate limit kicks in -> 429
+
+===============================
+PASS: 58   FAIL: 0
+===============================
